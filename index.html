@@ -502,16 +502,17 @@ margin-top:clamp(12px,1.5vw,16px);
 font-size:clamp(12px,0.85vw,14px);color:var(--text2);
 }
 .ru-link{
-display:inline-flex;align-items:center;gap:8px;
-margin-top:clamp(12px,1.5vw,16px);
-font-family:var(--font-mono);font-size:clamp(12px,0.85vw,13px);
-color:var(--accent1);text-decoration:none;
-border:1px solid rgba(255,107,53,0.25);
-padding:8px 16px;border-radius:8px;
-background:rgba(255,107,53,0.05);
+display:inline-flex;align-items:center;gap:10px;
+margin-top:clamp(16px,2vw,24px);
+font-family:var(--font-display);font-size:clamp(13px,1vw,15px);
+font-weight:600;color:var(--bg1);text-decoration:none;
+border:none;
+padding:14px 28px;border-radius:var(--radius-sm);
+background:var(--gradient1);
 transition:all 0.3s;
+box-shadow:0 4px 20px rgba(255,107,53,0.2);
 }
-.ru-link:hover{background:rgba(255,107,53,0.12);border-color:var(--accent1)}
+.ru-link:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,53,0.35)}
 
 /* ANIMATIONS */
 @keyframes fadeInUp{
