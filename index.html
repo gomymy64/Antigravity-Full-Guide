@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Материалы к Уроку Google AntiGravity: Как использовать ИИ лучше 99% людей | Мастодонт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg1:#0a0e17;
+--bg2:#111827;
+--bg3:#1a2235;
+--border:#1e293b;
+--border-hover:#334155;
+--text1:#f1f5f9;
+--text2:#94a3b8;
+--text3:#64748b;
+--accent1:#ff6b35;
+--accent2:#e91e63;
+--accent3:#ffb703;
+--gradient1:linear-gradient(135deg, var(--accent1), var(--accent2));
+--gradient2:linear-gradient(135deg, var(--accent2), var(--accent1));
+--gradient-text:linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 50%, var(--accent3) 100%);
+--radius:16px;
+--radius-sm:10px;
+--max-w:1120px;
+--font-display:'Unbounded', sans-serif;
+--font-body:'Outfit', sans-serif;
+--font-mono:'JetBrains Mono', monospace;
+}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+font-family:var(--font-body);
+background:var(--bg1);
+color:var(--text1);
+line-height:1.7;
+font-size:clamp(15px,1.1vw,17px);
+min-height:100vh;
+overflow-x:hidden;
+}
+body::before{
+content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+background:
+radial-gradient(ellipse 900px 600px at 10% 20%, rgba(255,107,53,0.06) 0%, transparent 60%),
+radial-gradient(ellipse 800px 500px at 90% 80%, rgba(233,30,99,0.06) 0%, transparent 60%),
+radial-gradient(ellipse 600px 400px at 50% 50%, rgba(255,183,3,0.03) 0%, transparent 60%);
+}
+body::after{
+content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.025;
+background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg1)}
+::-webkit-scrollbar-thumb{background:var(--gradient1);border-radius:4px}
+
+/* NAV */
+.nav{
+position:sticky;top:0;z-index:1000;
+background:rgba(10,14,23,0.85);
+backdrop-filter:blur(20px);
+border-bottom:2px solid transparent;
+border-image:linear-gradient(90deg, transparent 0%, var(--accent1) 30%, var(--accent2) 50%, var(--accent3) 70%, transparent 100%) 1;
+}
+.nav-inner{
+max-width:var(--max-w);margin:0 auto;
+padding:0 clamp(16px,3vw,32px);
+display:flex;align-items:center;justify-content:space-between;
+height:clamp(56px,7vw,68px);
+}
+.nav-brand{
+font-family:var(--font-display);
+font-weight:800;
+font-size:clamp(14px,1.3vw,18px);
+letter-spacing:3px;
+background:var(--gradient-text);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+.nav-links{display:flex;gap:clamp(12px,2vw,24px)}
+.nav-links a{
+font-family:var(--font-body);
+font-size:clamp(12px,0.9vw,14px);
+font-weight:500;
+color:var(--text3);
+text-decoration:none;
+transition:color 0.3s;
+letter-spacing:0.5px;
+}
+.nav-links a:hover{color:var(--accent1)}
+
+/* CONTAINER */
+.container{
+max-width:var(--max-w);
+margin:0 auto;
+padding:0 clamp(16px,3vw,32px);
+position:relative;z-index:1;
+}
+
+/* HERO */
+.hero{
+padding:clamp(48px,8vw,100px) 0 clamp(32px,5vw,60px);
+text-align:center;
+}
+.hero-badge{
+display:inline-block;
+font-family:var(--font-mono);
+font-size:clamp(10px,0.8vw,12px);
+font-weight:600;
+letter-spacing:3px;
+color:var(--accent1);
+border:1px solid rgba(255,107,53,0.3);
+padding:6px 20px;
+border-radius:100px;
+margin-bottom:clamp(20px,3vw,32px);
+background:rgba(255,107,53,0.05);
+animation:fadeInDown 0.8s ease-out;
+}
+.hero h1{
+font-family:var(--font-display);
+font-size:clamp(24px,3.8vw,52px);
+font-weight:800;
+line-height:1.15;
+margin-bottom:clamp(16px,2vw,24px);
+background:var(--gradient-text);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+background-clip:text;
+animation:fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero-sub{
+font-size:clamp(15px,1.3vw,20px);
+color:var(--text2);
+max-width:700px;
+margin:0 auto clamp(24px,3vw,40px);
+font-weight:300;
+animation:fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-search{
+display:inline-flex;align-items:center;gap:12px;
+background:var(--bg2);
+border:1px solid var(--border);
+border-radius:var(--radius-sm);
+padding:clamp(10px,1.2vw,14px) clamp(16px,2vw,24px);
+font-size:clamp(12px,0.9vw,14px);
+color:var(--text2);
+animation:fadeInUp 0.8s ease-out 0.3s both;
+cursor:default;
+}
+.hero-search span{color:var(--text3)}
+.hero-search .copy-sm{
+background:rgba(255,107,53,0.1);
+border:1px solid rgba(255,107,53,0.25);
+color:var(--accent1);
+padding:5px 14px;
+border-radius:6px;
+cursor:pointer;
+font-family:var(--font-mono);
+font-size:11px;
+font-weight:500;
+transition:all 0.3s;
+white-space:nowrap;
+}
+.hero-search .copy-sm:hover{
+background:rgba(255,107,53,0.2);
+border-color:var(--accent1);
+}
+
+/* DIVIDER */
+.divider{
+height:2px;
+background:linear-gradient(90deg, transparent 0%, var(--accent1) 30%, var(--accent2) 50%, var(--accent3) 70%, transparent 100%);
+margin:clamp(32px,5vw,60px) 0;
+border:none;
+opacity:0.5;
+}
+
+/* SECTION TITLE */
+.section-title{
+font-family:var(--font-display);
+font-size:clamp(18px,2vw,28px);
+font-weight:700;
+margin-bottom:clamp(20px,3vw,36px);
+color:var(--text1);
+display:flex;align-items:center;gap:12px;
+}
+.section-title .icon{
+font-size:clamp(20px,2.2vw,28px);
+filter:drop-shadow(0 0 8px rgba(255,107,53,0.3));
+}
+
+/* LEARN CARDS */
+.learn-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(min(100%,300px),1fr));
+gap:clamp(16px,2vw,24px);
+margin-bottom:clamp(8px,2vw,16px);
+}
+.learn-card{
+background:var(--bg2);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:clamp(24px,2.5vw,32px);
+position:relative;
+overflow:hidden;
+transition:border-color 0.3s, transform 0.3s;
+}
+.learn-card::before{
+content:'';position:absolute;top:0;left:0;right:0;height:3px;
+background:var(--gradient1);
+}
+.learn-card:hover{
+border-color:var(--border-hover);
+transform:translateY(-2px);
+}
+.learn-card .card-icon{
+font-size:clamp(28px,3vw,36px);
+margin-bottom:clamp(12px,1.5vw,18px);
+display:block;
+}
+.learn-card p{
+color:var(--text2);
+font-size:clamp(14px,1vw,16px);
+font-weight:400;
+line-height:1.6;
+}
+
+/* TOOLS */
+.tools-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(min(100%,280px),1fr));
+gap:clamp(14px,1.5vw,20px);
+margin-bottom:clamp(8px,2vw,16px);
+}
+.tool-card{
+display:flex;align-items:center;gap:clamp(14px,1.5vw,18px);
+background:var(--bg2);
+border:1px solid var(--border);
+border-radius:var(--radius-sm);
+padding:clamp(16px,2vw,22px);
+transition:border-color 0.3s;
+text-decoration:none;
+}
+.tool-card:hover{border-color:var(--accent2)}
+.tool-icon{
+width:clamp(40px,4vw,48px);height:clamp(40px,4vw,48px);
+border-radius:12px;
+background:var(--bg3);
+display:flex;align-items:center;justify-content:center;
+font-size:clamp(18px,2vw,22px);
+flex-shrink:0;
+}
+.tool-info{flex:1;min-width:0}
+.tool-name{
+font-weight:600;
+font-size:clamp(14px,1vw,16px);
+color:var(--text1);
+margin-bottom:2px;
+}
+.tool-desc{
+font-size:clamp(12px,0.8vw,13px);
+color:var(--text3);
+}
+.tool-badge{
+font-family:var(--font-mono);
+font-size:10px;
+font-weight:600;
+letter-spacing:1px;
+padding:4px 10px;
+border-radius:100px;
+background:rgba(255,107,53,0.1);
+color:var(--accent1);
+border:1px solid rgba(255,107,53,0.2);
+white-space:nowrap;
+flex-shrink:0;
+}
+
+/* PROMPT SECTION */
+.prompt-section{margin-bottom:clamp(8px,2vw,16px)}
+.prompt-intro{
+font-size:clamp(15px,1.1vw,18px);
+color:var(--text2);
+margin-bottom:clamp(20px,3vw,32px);
+line-height:1.7;
+max-width:800px;
+}
+.prompt-block{
+background:var(--bg2);
+border:1px solid var(--border);
+border-radius:var(--radius);
+overflow:hidden;
+position:relative;
+border-left:4px solid transparent;
+border-image:linear-gradient(180deg, var(--accent1), var(--accent2), var(--accent3)) 1;
+border-image-slice:1;
+box-shadow:
+-4px 0 30px rgba(255,107,53,0.06),
+0 0 60px rgba(233,30,99,0.04);
+}
+.prompt-header{
+display:flex;align-items:center;justify-content:space-between;
+padding:clamp(16px,2vw,22px) clamp(20px,2.5vw,28px);
+background:var(--bg3);
+border-bottom:1px solid var(--border);
+flex-wrap:wrap;gap:12px;
+}
+.prompt-label{
+font-family:var(--font-display);
+font-size:clamp(13px,1vw,16px);
+font-weight:600;
+color:var(--text1);
+display:flex;align-items:center;gap:8px;
+}
+.copy-btn{
+font-family:var(--font-mono);
+font-size:clamp(11px,0.8vw,13px);
+font-weight:500;
+padding:8px 20px;
+border-radius:8px;
+border:1px solid rgba(255,107,53,0.3);
+background:rgba(255,107,53,0.08);
+color:var(--accent1);
+cursor:pointer;
+transition:all 0.3s;
+display:flex;align-items:center;gap:6px;
+white-space:nowrap;
+}
+.copy-btn:hover{
+background:rgba(255,107,53,0.15);
+border-color:var(--accent1);
+box-shadow:0 0 20px rgba(255,107,53,0.15);
+}
+.copy-btn.copied{
+background:rgba(255,107,53,0.2);
+border-color:var(--accent1);
+color:#fff;
+}
+.prompt-content{
+padding:clamp(20px,2.5vw,28px);
+font-family:var(--font-mono);
+font-size:clamp(12px,0.85vw,14px);
+line-height:1.8;
+color:var(--text2);
+white-space:pre-wrap;
+word-break:break-word;
+overflow-x:auto;
+max-height:none;
+}
+.prompt-content .emoji{font-family:var(--font-body)}
+
+/* LINKS SECTION */
+.links-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(min(100%,300px),1fr));
+gap:clamp(14px,1.5vw,20px);
+margin-bottom:clamp(8px,2vw,16px);
+}
+.link-card{
+display:flex;align-items:center;gap:clamp(14px,1.5vw,18px);
+background:var(--bg2);
+border:1px solid var(--border);
+border-radius:var(--radius-sm);
+padding:clamp(18px,2vw,24px);
+text-decoration:none;
+transition:all 0.3s;
+}
+.link-card:hover{
+border-color:var(--accent2);
+transform:translateY(-2px);
+box-shadow:0 8px 30px rgba(233,30,99,0.1);
+}
+.link-icon{
+width:clamp(44px,4.5vw,52px);height:clamp(44px,4.5vw,52px);
+border-radius:12px;
+background:linear-gradient(135deg, rgba(255,107,53,0.1), rgba(233,30,99,0.1));
+display:flex;align-items:center;justify-content:center;
+font-size:clamp(20px,2.2vw,24px);
+flex-shrink:0;
+}
+.link-info{flex:1;min-width:0}
+.link-name{
+font-weight:600;
+font-size:clamp(15px,1.1vw,17px);
+color:var(--text1);
+margin-bottom:4px;
+}
+.link-desc{
+font-size:clamp(12px,0.85vw,14px);
+color:var(--text3);
+}
+
+/* CTA */
+.cta-block{
+background:var(--bg2);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:clamp(28px,4vw,48px) clamp(24px,5vw,100px);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:clamp(20px,3vw,40px);
+margin-bottom:clamp(40px,6vw,80px);
+animation:ctaGlow 3s ease-in-out infinite;
+}
+@keyframes ctaGlow{
+0%,100%{box-shadow:0 0 30px rgba(255,107,53,0.05),0 0 60px rgba(233,30,99,0.03)}
+50%{box-shadow:0 0 40px rgba(255,107,53,0.1),0 0 80px rgba(233,30,99,0.06)}
+}
+.cta-text{
+font-family:var(--font-display);
+font-size:clamp(16px,1.8vw,24px);
+font-weight:700;
+line-height:1.4;
+color:var(--text1);
+}
+.cta-text .grad{
+background:var(--gradient-text);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+.cta-btn{
+font-family:var(--font-display);
+font-size:clamp(12px,1vw,14px);
+font-weight:600;
+padding:18px 40px;
+border-radius:var(--radius-sm);
+background:var(--gradient1);
+color:var(--bg1);
+text-decoration:none;
+white-space:nowrap;
+transition:all 0.3s;
+flex-shrink:0;
+}
+.cta-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 30px rgba(255,107,53,0.25);
+}
+
+/* FOOTER */
+.footer{
+text-align:center;
+padding:clamp(32px,5vw,48px) 0;
+border-top:1px solid var(--border);
+}
+.footer-brand{
+font-family:var(--font-display);
+font-weight:800;
+font-size:clamp(14px,1.3vw,18px);
+letter-spacing:3px;
+background:var(--gradient-text);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+background-clip:text;
+margin-bottom:8px;
+}
+.footer-tagline{
+font-size:clamp(12px,0.9vw,14px);
+color:var(--text3);
+margin-bottom:16px;
+}
+.footer-yt{
+font-family:var(--font-mono);
+font-size:clamp(11px,0.8vw,13px);
+color:var(--text3);
+cursor:pointer;
+transition:color 0.3s;
+border:none;background:none;
+}
+.footer-yt:hover{color:var(--accent1)}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeInDown{
+from{opacity:0;transform:translateY(-10px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.nav-links a{font-size:11px}
+.cta-block{flex-direction:column;text-align:center;padding:clamp(24px,5vw,36px) clamp(20px,4vw,32px)}
+.cta-btn{width:100%;text-align:center}
+.hero-search{flex-direction:column;text-align:center;gap:8px}
+}
+@media(max-width:480px){
+.nav-links{gap:8px}
+.nav-links a{font-size:10px}
+.prompt-header{flex-direction:column;align-items:flex-start}
+}
+@media(min-width:2560px){
+.container{max-width:1200px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+<div class="nav-inner">
+<div class="nav-brand">МАСТОДОНТ</div>
+<div class="nav-links">
+<a href="#tools">Инструменты</a>
+<a href="#prompt">Промпт</a>
+<a href="#links">Ссылки</a>
+</div>
+</div>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-badge">МАТЕРИАЛЫ К УРОКУ</div>
+<h1>Google AntiGravity: Как использовать ИИ лучше 99% людей (Гайд)</h1>
+<p class="hero-sub">Вставь мастер-промпт B.L.A.S.T. в AntiGravity и превращай нейронку из болтуна в инженера</p>
+<div class="hero-search">
+<span>Ищи на YouTube:</span> Google AntiGravity: Как использовать ИИ лучше 99% людей (Гайд)
+<button class="copy-sm" onclick="copyText('Google AntiGravity: Как использовать ИИ лучше 99% людей (Гайд)',this)">Скопировать</button>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- LEARN -->
+<h2 class="section-title"><span class="icon">📋</span> Что ты научишься делать</h2>
+<div class="learn-grid">
+<div class="learn-card">
+<span class="card-icon">🎯</span>
+<p>Настроить AntiGravity на профессиональную работу с помощью мастер-промпта</p>
+</div>
+<div class="learn-card">
+<span class="card-icon">⚡</span>
+<p>Использовать протокол B.L.A.S.T. для построения надёжных AI-автоматизаций</p>
+</div>
+<div class="learn-card">
+<span class="card-icon">🧠</span>
+<p>Организовать проект по 3-слойной архитектуре A.N.T., чтобы ИИ не галлюцинировал</p>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- TOOLS -->
+<section id="tools">
+<h2 class="section-title"><span class="icon">🛠️</span> Что понадобится</h2>
+<div class="tools-grid">
+<a href="https://antigravity.google/" target="_blank" class="tool-card">
+<div class="tool-icon">🚀</div>
+<div class="tool-info">
+<div class="tool-name">AntiGravity</div>
+<div class="tool-desc">AI IDE от Google</div>
+</div>
+<span class="tool-badge">БЕСПЛАТНО</span>
+</a>
+<div class="tool-card">
+<div class="tool-icon">👤</div>
+<div class="tool-info">
+<div class="tool-name">Google аккаунт</div>
+<div class="tool-desc">Для входа в AntiGravity</div>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- PROMPT -->
+<section id="prompt">
+<h2 class="section-title"><span class="icon">💬</span> Мастер-промпт B.L.A.S.T.</h2>
+<p class="prompt-intro">Скопируй промпт ниже и вставь его в чат AntiGravity в начале каждого нового проекта. Это системная инструкция, которая превращает нейронку из болтуна в инженера - она будет работать по чёткому протоколу, а не угадывать.</p>
+
+<div class="prompt-block">
+<div class="prompt-header">
+<span class="prompt-label">💬 Промпт - B.L.A.S.T. Master System Prompt</span>
+<button class="copy-btn" onclick="copyPrompt(this)"><span>📋</span> Скопировать</button>
+</div>
+<div class="prompt-content" id="blast-prompt">🚀 B.L.A.S.T. Master System Prompt
+
+Вставь это в начале каждого нового проекта 👇
+
+Identity: You are the System Pilot. Your mission is to build deterministic, self-healing automation in Antigravity using the B.L.A.S.T. (Blueprint, Link, Architect, Stylize, Trigger) protocol and the A.N.T. 3-layer architecture. You prioritize reliability over speed and never guess at business logic.
+
+🟢 Protocol 0: Initialization (Mandatory)
+Before any code is written or tools are built:
+1. Initialize Project Memory
+   * Create:
+      * task_plan.md → Phases, goals, and checklists
+      * findings.md → Research, discoveries, constraints
+      * progress.md → What was done, errors, tests, results
+   * Initialize claude.md as the Project Constitution:
+      * Data schemas
+      * Behavioral rules
+      * Architectural invariants
+2. Halt Execution You are strictly forbidden from writing scripts in tools/ until:
+   * Discovery Questions are answered
+   * The Data Schema is defined in gemini.md
+   * task_plan.md has an approved Blueprint
+
+🏗️ Phase 1: B - Blueprint (Vision &amp; Logic)
+1. Discovery: Ask the user the following 5 questions:
+* North Star: What is the singular desired outcome?
+* Integrations: Which external services (Slack, Shopify, etc.) do we need? Are keys ready?
+* Source of Truth: Where does the primary data live?
+* Delivery Payload: How and where should the final result be delivered?
+* Behavioral Rules: How should the system "act"? (e.g., Tone, specific logic constraints, or "Do Not" rules).
+2. Data-First Rule: You must define the JSON Data Schema (Input/Output shapes) in gemini.md. Coding only begins once the "Payload" shape is confirmed.
+3. Research: Search github repos and other databases for any helpful resources for this project
+
+⚡ Phase 2: L - Link (Connectivity)
+1. Verification: Test all API connections and .env credentials. 2. Handshake: Build minimal scripts in tools/ to verify that external services are responding correctly. Do not proceed to full logic if the "Link" is broken.
+
+⚙️ Phase 3: A - Architect (The 3-Layer Build)
+You operate within a 3-layer architecture that separates concerns to maximize reliability. LLMs are probabilistic; business logic must be deterministic.
+Layer 1: Architecture (architecture/)
+* Technical SOPs written in Markdown.
+* Define goals, inputs, tool logic, and edge cases.
+* The Golden Rule: If logic changes, update the SOP before updating the code.
+Layer 2: Navigation (Decision Making)
+* This is your reasoning layer. You route data between SOPs and Tools.
+* You do not try to perform complex tasks yourself; you call execution tools in the right order.
+Layer 3: Tools (tools/)
+* Deterministic Python scripts. Atomic and testable.
+* Environment variables/tokens are stored in .env.
+* Use .tmp/ for all intermediate file operations.
+
+✨ Phase 4: S - Stylize (Refinement &amp; UI)
+1. Payload Refinement: Format all outputs (Slack blocks, Notion layouts, Email HTML) for professional delivery. 2. UI/UX: If the project includes a dashboard or frontend, apply clean CSS/HTML and intuitive layouts. 3. Feedback: Present the stylized results to the user for feedback before final deployment.
+
+🛰️ Phase 5: T - Trigger (Deployment)
+1. Cloud Transfer: Move finalized logic from local testing to the production cloud environment. 2. Automation: Set up execution triggers (Cron jobs, Webhooks, or Listeners). 3. Documentation: Finalize the Maintenance Log in gemini.md for long-term stability.
+
+🛠️ Operating Principles
+1. The "Data-First" Rule
+Before building any Tool, you must define the Data Schema in gemini.md.
+* What does the raw input look like?
+* What does the processed output look like?
+* Coding only begins once the "Payload" shape is confirmed.
+* After any meaningful task:
+   * Update progress.md with what happened and any errors.
+   * Store discoveries in findings.md.
+   * Only update gemini.md when:
+      * A schema changes
+      * A rule is added
+      * Architecture is modified
+gemini.md is law.
+The planning files are memory.
+2. Self-Annealing (The Repair Loop)
+When a Tool fails or an error occurs:
+1. Analyze: Read the stack trace and error message. Do not guess.
+2. Patch: Fix the Python script in tools/.
+3. Test: Verify the fix works.
+4. Update Architecture: Update the corresponding .md file in architecture/ with the new learning (e.g., "API requires a specific header" or "Rate limit is 5 calls/sec") so the error never repeats.
+3. Deliverables vs. Intermediates
+* Local (.tmp/): All scraped data, logs, and temporary files. These are ephemeral and can be deleted.
+* Global (Cloud): The "Payload." Google Sheets, Databases, or UI updates. A project is only "Complete" when the payload is in its final cloud destination.
+
+📂 File Structure Reference
+├── claude.md          # Project Map &amp; State Tracking
+├── .env               # API Keys/Secrets (Verified in 'Link' phase)
+├── architecture/      # Layer 1: SOPs (The "How-To")
+├── tools/             # Layer 3: Python Scripts (The "Engines")
+└── .tmp/              # Temporary Workbench (Intermediates)</div>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- LINKS -->
+<section id="links">
+<h2 class="section-title"><span class="icon">🔗</span> Все ссылки</h2>
+<div class="links-grid">
+<a href="https://antigravity.google/" target="_blank" class="link-card">
+<div class="link-icon">🚀</div>
+<div class="link-info">
+<div class="link-name">AntiGravity</div>
+<div class="link-desc">AI IDE от Google - бесплатно</div>
+</div>
+<span class="tool-badge">ОТКРЫТЬ</span>
+</a>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- CTA -->
+<div class="cta-block">
+<div class="cta-text">Пошаговый план по&nbsp;выходу<br>на&nbsp;первые <span class="grad">100к в&nbsp;ИИ</span> в&nbsp;2026</div>
+<a href="https://t.me/mastodont_aibot?start=agency" target="_blank" class="cta-btn">Забрать план</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-brand">МАСТОДОНТ</div>
+<div class="footer-tagline">AI и нейросети - просто, по делу</div>
+<button class="footer-yt" onclick="copyText('Мастодонт',this)" title="Скопировать название канала">YouTube: Мастодонт</button>
+</footer>
+
+</div>
+
+<script>
+function copyText(text, btn) {
+navigator.clipboard.writeText(text).then(() => {
+const orig = btn.textContent;
+btn.textContent = '✓ Скопировано!';
+setTimeout(() => btn.textContent = orig, 2000);
+});
+}
+function copyPrompt(btn) {
+const el = document.getElementById('blast-prompt');
+const text = el.textContent;
+navigator.clipboard.writeText(text).then(() => {
+btn.classList.add('copied');
+btn.innerHTML = '<span>✓</span> Скопировано!';
+setTimeout(() => {
+btn.classList.remove('copied');
+btn.innerHTML = '<span>📋</span> Скопировать';
+}, 2000);
+});
+}
+</script>
+</body>
+</html>
