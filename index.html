@@ -291,12 +291,11 @@ border:1px solid var(--border);
 border-radius:var(--radius);
 overflow:hidden;
 position:relative;
-border-left:4px solid transparent;
-border-image:linear-gradient(180deg, var(--accent1), var(--accent2), var(--accent3)) 1;
-border-image-slice:1;
-box-shadow:
--4px 0 30px rgba(255,107,53,0.06),
-0 0 60px rgba(233,30,99,0.04);
+box-shadow:0 0 60px rgba(255,107,53,0.06),0 0 120px rgba(233,30,99,0.03);
+}
+.prompt-block::after{
+content:'';position:absolute;top:0;left:0;bottom:0;width:4px;
+background:linear-gradient(180deg, var(--accent1), var(--accent2), var(--accent3));
 }
 .prompt-header{
 display:flex;align-items:center;justify-content:space-between;
@@ -468,6 +467,52 @@ border:none;background:none;
 }
 .footer-yt:hover{color:var(--accent1)}
 
+/* RUSSIA SECTION */
+.ru-steps{display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);margin-bottom:clamp(8px,2vw,16px)}
+.ru-step{
+background:var(--bg2);border:1px solid var(--border);
+border-radius:var(--radius);padding:clamp(20px,2.5vw,28px);
+position:relative;overflow:hidden;
+}
+.ru-step::before{
+content:'';position:absolute;top:0;left:0;right:0;height:3px;
+background:var(--gradient1);
+}
+.ru-step-title{
+font-family:var(--font-display);font-size:clamp(14px,1.1vw,18px);
+font-weight:700;color:var(--text1);margin-bottom:clamp(8px,1vw,12px);
+display:flex;align-items:center;gap:10px;
+}
+.ru-step-num{
+font-family:var(--font-mono);font-size:clamp(11px,0.8vw,13px);
+font-weight:600;color:var(--accent1);
+background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.2);
+padding:2px 10px;border-radius:100px;
+}
+.ru-step p,.ru-step ul{color:var(--text2);font-size:clamp(13px,0.95vw,15px);line-height:1.7}
+.ru-step ul{list-style:none;padding:0}
+.ru-step ul li{padding-left:20px;position:relative;margin-bottom:6px}
+.ru-step ul li::before{content:'▸';position:absolute;left:0;color:var(--accent1)}
+.ru-step a{color:var(--accent1);text-decoration:none;border-bottom:1px solid rgba(255,107,53,0.3);transition:border-color 0.3s}
+.ru-step a:hover{border-color:var(--accent1)}
+.ru-note{
+background:rgba(255,107,53,0.05);border:1px solid rgba(255,107,53,0.15);
+border-radius:var(--radius-sm);padding:clamp(14px,1.5vw,20px);
+margin-top:clamp(12px,1.5vw,16px);
+font-size:clamp(12px,0.85vw,14px);color:var(--text2);
+}
+.ru-link{
+display:inline-flex;align-items:center;gap:8px;
+margin-top:clamp(12px,1.5vw,16px);
+font-family:var(--font-mono);font-size:clamp(12px,0.85vw,13px);
+color:var(--accent1);text-decoration:none;
+border:1px solid rgba(255,107,53,0.25);
+padding:8px 16px;border-radius:8px;
+background:rgba(255,107,53,0.05);
+transition:all 0.3s;
+}
+.ru-link:hover{background:rgba(255,107,53,0.12);border-color:var(--accent1)}
+
 /* ANIMATIONS */
 @keyframes fadeInUp{
 from{opacity:0;transform:translateY(20px)}
@@ -504,6 +549,7 @@ to{opacity:1;transform:translateY(0)}
 <div class="nav-links">
 <a href="#tools">Инструменты</a>
 <a href="#prompt">Промпт</a>
+<a href="#russia">Из РФ</a>
 <a href="#links">Ссылки</a>
 </div>
 </div>
@@ -664,6 +710,55 @@ When a Tool fails or an error occurs:
 ├── tools/             # Layer 3: Python Scripts (The "Engines")
 └── .tmp/              # Temporary Workbench (Intermediates)</div>
 </div>
+</section>
+
+<hr class="divider">
+
+<!-- RUSSIA -->
+<section id="russia">
+<h2 class="section-title"><span class="icon">🇷🇺</span> Как работать из РФ</h2>
+<div class="ru-steps">
+
+<div class="ru-step">
+<div class="ru-step-title"><span class="ru-step-num">01</span> Подготовка Google-аккаунта</div>
+<p>AntiGravity требует аккаунт Google из поддерживаемого региона. Три способа:</p>
+<ul>
+<li><strong>Способ А - Смена региона (рекомендуется):</strong> Используй официальную форму Google Country Association. Выбери страну: США, Великобритания, Финляндия, Венгрия или Нидерланды. Укажи причину переезда. Ответ приходит за 1-3 часа, подожди 2-3 дня перед использованием.</li>
+<li><strong>Способ Б - Покупка готового аккаунта:</strong> Площадки: Plati.market или другие маркетплейсы. Ищи аккаунты из США, Турции с давней "отлежкой".</li>
+<li><strong>Способ В - Создание нового:</strong> Включи VPN (США/UK), используй виртуальные номера: OnlineSim.io, 365sms.ru, TextVerified.</li>
+</ul>
+</div>
+
+<div class="ru-step">
+<div class="ru-step-title"><span class="ru-step-num">02</span> Настройка сети (VPN)</div>
+<ul>
+<li><strong>Клиенты:</strong> v2rayN, NekoBox, Hiddify (с обфускацией трафика)</li>
+<li><strong>Серверы:</strong> Собственный VPS с AmneziaVPN (рекомендуется, 100-200 руб/мес), Proton VPN, Windscribe, Hotspot Shield</li>
+<li><strong>DNS:</strong> Windows/Android: dns.comss.one или xbox-dns.ru. iPhone: 1.1.1.1 (Cloudflare)</li>
+</ul>
+</div>
+
+<div class="ru-step">
+<div class="ru-step-title"><span class="ru-step-num">03</span> Настройка Windows</div>
+<ul>
+<li>Переключи язык системы на English (US)</li>
+<li>Установи переменные среды <code>HTTP_PROXY</code> и <code>HTTPS_PROXY</code> на localhost:порт твоего VPN</li>
+</ul>
+</div>
+
+<div class="ru-step">
+<div class="ru-step-title"><span class="ru-step-num">04</span> Если "вечная загрузка"</div>
+<p>Если AntiGravity зависает при входе:</p>
+<ul>
+<li>Скопируй ссылку <code>antigravity://oauth-success</code> из успешного входа</li>
+<li>Открой PowerShell от администратора</li>
+<li>Выполни команду передачи токена в приложение</li>
+</ul>
+<div class="ru-note">Подробная инструкция со скриншотами - по ссылке ниже.</div>
+</div>
+
+</div>
+<a href="https://teletype.in/@mastadont/antigravity" target="_blank" class="ru-link">📖 Полный гайд со скриншотами на Teletype</a>
 </section>
 
 <hr class="divider">
